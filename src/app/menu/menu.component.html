@@ -1,0 +1,30 @@
+<h1 class="text-5xl text-center p-4 m-8 font-thin text-primary">Menu</h1>
+<div class="w-full flex flex-row  h-full relative">
+    <div class="w-9/12 flex flex-row  relative">
+        <div class="bg-[url('src/assets/background/motif-low.png')] w-full h-full min-h-screen absolute z-[-1]"></div>
+        <div class="w-1/6 pt-10 pl-10">
+        <app-nav (getCategoryIdEvent)="updateCategoryId($event)"></app-nav>
+        </div>
+        <div class="w-5/6 flex flex-wrap justify-evenly items-stretch pt-20 gap-10">
+            <div *ngFor="let item of productList" class="w-[200px] flex flex-col items-center justify-between gap-4 text-center relative product">
+                <a class="w-full h-full absolute" [routerLink]="'product/'+item.id"></a>
+                <img [src]="item.imageUrl" width="150px" height="150px" />
+                <p class="text-lg text-primary font-semibold">{{item.title}}</p>
+                <div class="relative">
+                    <p class="font-semibold price">&euro; {{item.price}}</p>
+                    <button (click)="addToCart(item.id!, item.title, item.price, item.imageUrl)" class="px-4 py-1  bg-primary rounded-sm absolute top-5 left-[-10px] z-[-2] buyButton hover:opacity-80 font-semibold">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="w-3/12 pt-10 fixed right-0 h-full px-10">
+        <app-cart *ngIf="loginStatus && customerCart" [currentCart]="customerCart"></app-cart>
+        <div *ngIf="!loginStatus">
+            <h1 class="text-2xl text-primary">My Basket</h1>
+            <div class="w-full flex flex-col items-center justify-center gap-10 h-96 ">
+                <h1>Login / Sign Up to Order</h1>
+                <button class="px-4 py-1 bg-primary rounded-sm hover:opacity-80 font-semibold text-2xl" routerLink="/auth">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

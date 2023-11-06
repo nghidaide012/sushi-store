@@ -1,0 +1,10 @@
+.product:hover .buyButton
+{
+    z-index: 0;
+    top:0;
+    transition: 300ms;
+}
+.product:hover .price
+{
+    visibility: hidden;
+}

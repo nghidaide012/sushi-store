@@ -1,0 +1,10 @@
+.itemCart:hover .deleteButton
+{
+    display: block;
+    transition: 200ms;
+}
+
+.itemCart:hover .modify
+{
+    opacity: 100;
+}

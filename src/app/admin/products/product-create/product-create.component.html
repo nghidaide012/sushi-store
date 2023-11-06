@@ -1,0 +1,44 @@
+<div class="w-full flex flex-col justify-start items-center p-10 gap-10">
+    <h1 class="text-4xl">New Product</h1>
+    <form [formGroup]="form" (ngSubmit)="onCreate()" class="flex flex-row gap-20 w-8/12 justify-between">
+        <div class="w-6/12 flex flex-col gap-8">
+        <div>
+            <label for="name" class="text-xl text-primary">Product Name</label>
+            <input type="text" formControlName="name" id="name" class="placeholder:text-primary placeholder:opacity-70 border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-12 border-opacity-50 text-primary p-4 bg-black" />
+        </div>
+        
+        <div>
+            <label for="description" class="text-xl text-primary">Product Description</label>
+            <textarea type="text" formControlName="description"  id="description" class="placeholder:text-primary placeholder:opacity-70 border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-28 border-opacity-50 text-primary p-4 bg-black"></textarea>
+        </div>
+        <div>
+            <label for="image" class="text-xl text-primary">Product Name</label>
+            <input type="file" accept="image/*" formControlName="image" id="image" class="placeholder:text-primary placeholder:opacity-70 border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-16 border-opacity-50 text-primary p-4 bg-black" (change)="selectImg($event)" />
+        </div>
+    </div>
+    <div class="w-4/12 flex flex-col gap-8">
+        <div>
+            <label for="category" class="text-xl text-primary">Category</label>
+            <select formControlName="category" class=" border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-12 border-opacity-50 text-primary p-4 bg-black">
+                <option *ngFor="let item of categoriesList" [ngValue]="item.id" class=" border-primary border-solid border-[1px]l h-12 border-opacity-50 text-primary p-">{{item.title}}</option>
+            </select>
+        </div>
+        <div>
+            <label for="price" class="text-xl text-primary">Product Price</label>
+            <input type="number" formControlName="price" id="price" class="placeholder:text-primary placeholder:opacity-70 border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-12 border-opacity-50 text-primary p-4 bg-black" />
+        </div>
+        <div>
+            <label for="kCal" class="text-xl text-primary">Product calories</label>
+            <input type="number" formControlName="kCal" id="kCal" class="placeholder:text-primary placeholder:opacity-70 border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-12 border-opacity-50 text-primary p-4 bg-black" />
+        </div>
+        <div>
+            <label for="numOfPiece" class="text-xl text-primary">Number of Piece</label>
+            <input type="number" formControlName="numOfPiece" id="numOfPiece" class="placeholder:text-primary placeholder:opacity-70 border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-12 border-opacity-50 text-primary p-4 bg-black" />
+        </div>
+        <div class="flex flex-row gap-8">
+            <button type="submit" class="bg-primary rounded-md hover:opacity-80 disabled:bg-gray-600 hover:disabled:opacity-100 px-4 py-2" [disabled]="!form.valid">Add</button>
+            <button type="button" class="bg-red-600 rounded-md hover:opacity-80  px-4 py-2" [routerLink]="['../']" >Back</button>
+        </div>
+    </div>
+    </form>
+</div>

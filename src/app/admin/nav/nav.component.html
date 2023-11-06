@@ -1,0 +1,5 @@
+<div class=" flex flex-col justify-start items-start h-full pt-20 gap-12">
+    <ng-container *ngFor="let item of navContent" >
+        <a [routerLink]="item.link" class="text-xl p-3 px-8 rounded-md" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: false}">{{item.title}}</a>
+    </ng-container>
+</div>

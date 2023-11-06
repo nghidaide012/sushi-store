@@ -1,0 +1,4 @@
+<div class="w-full h-full flex flex-col justify-start items-start gap-4 pl-4">
+    <a class="text-base text-primary font-bold hover:opacity-80 cursor-pointer" (click)="getCategoryId('')">All</a>
+    <a *ngFor="let item of categoryList" class="text-base text-primary font-bold hover:opacity-80 cursor-pointer" (click)="getCategoryId(item.id!)">{{item.title}}</a>
+</div>

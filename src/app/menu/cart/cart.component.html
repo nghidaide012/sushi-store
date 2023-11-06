@@ -1,0 +1,26 @@
+<div>
+    <h1 class="text-2xl text-primary border-b-[1px] border-[#695f55] py-4">My Basket</h1>
+    <div *ngIf="cartItem.length === 0" class="w-full flex flex-col items-center justify-center gap-10 h-96 ">
+        <h1 class="text-2xl text-center">Add dishes and order your meal</h1>
+    </div>
+    <div *ngIf="cartItem.length > 0">
+        <div *ngFor="let item of cartItem" class="itemCart cursor-pointer flex flex-row text-sm justify-between items-center p-4 py-6 border-b-[1px] border-[#695f55] text-primary relative">
+            <div class="flex flex-col absolute left-[-10px] gap-1 text-lg opacity-0 modify">
+                <button (click)="increaseQuantity(item)">+</button>
+                <button (click)="decreaseQuantity(item)">-</button>
+            </div>
+            <div class="flex flex-row w-7/12 gap-4 items-center">
+                <p>{{item.quantity}}x</p>
+                <h1>{{item.itemName}}</h1>
+            </div>
+            <div class="flex flex-row gap-4 relative">
+            <p>&euro; {{(item.price * item.quantity) | number:'1.2-2'}}</p>
+            <button (click)="deleteItem(item.id!)" class="deleteButton hidden">&#10005;</button>
+            </div>
+        </div>
+        <button [routerLink]="'order/' + currentCart!.id!" class="w-full text-lg font-semibold flex flex-row justify-between p-4 mt-4 bg-primary rounded-sm">
+            <h1>See Basket</h1>
+            <h1>&euro; {{totalPrice | number:'1.2-2'}}</h1>
+        </button>
+    </div>
+</div>

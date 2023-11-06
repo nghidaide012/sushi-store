@@ -1,0 +1,30 @@
+<div class="w-full h-full flex justify-center items-center">
+    <a class="exit absolute right-10 top-10 text-5xl hover:opacity-80  " [routerLink]="['../']">&#10005;</a>
+    <div *ngIf="currentOrder" class="w-9/12 h-5/6 pt-14 flex flex-col justify-start items-center gap-5">
+        <div class="w-10/12 flex flex-row items-center justify-between border-b-[1px] border-[#695f55] pb-10">
+            <h1 class="text-2xl text-primary font-semibold">Customer: {{currentOrder.customerId}}</h1>
+            <button  class="text-2xl px-6 py-3 bg-primary rounded-sm font-semibold hover:opacity-80" *ngIf="currentOrder.status === 'Processing Order'" (click)="toggleOrderStatus(currentOrder, currentOrder.status)">Prepare Food</button>   
+            <button  class="text-2xl px-6 py-3 bg-primary rounded-sm font-semibold hover:opacity-80" *ngIf="currentOrder.status === 'Preparing Food'" (click)="toggleOrderStatus(currentOrder, currentOrder.status)">Good for Delivery</button>   
+            <button  class="text-2xl px-6 py-3 bg-primary rounded-sm font-semibold hover:opacity-80" *ngIf="currentOrder.status === 'Out for Delivery'" (click)="toggleOrderStatus(currentOrder, currentOrder.status)">Complete Order</button>   
+            <button  class="text-2xl px-6 py-3 bg-primary rounded-sm font-semibold hover:opacity-80" *ngIf="currentOrder.status === 'Completed'">Order Completed</button>   
+
+
+
+        </div>
+        <div *ngFor="let item of orderItems" class="flex flex-row items-center justify-between w-10/12 pb-3 border-b-[1px] border-[#695f55]">
+            <div class="flex flex-row items-center justify-start gap-7 w-1/3">
+                <h2 class="text-lg text-primary">{{item.quantity}}x</h2>
+                <img [src]="item.itemUrl" width="70px" height="70px" />
+                <h2 class="">{{item.itemName}}</h2>
+            </div>
+            <div class="flex flex-row justify-between items-center gap-10 pr-4 w-1/4">
+
+                <p>&euro; {{item.price * item.quantity | number:'1.2-2'}}</p>
+            </div>
+        </div>
+        <div class="w-10/12 flex flex-row justify-between items-center">
+            <h1 class="text-3xl text-primary font-semibold">Total:</h1>
+            <h1 class="text-3xl  font-semibold">&euro; {{totalPrice | number:'1.2-2'}}</h1>
+        </div>
+    </div>
+</div>

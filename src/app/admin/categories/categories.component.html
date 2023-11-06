@@ -1,0 +1,19 @@
+<div class="flex flex-col w-full justify-start items-center p-20 gap-10" > 
+    <h1 class="text-4xl">Categories</h1>
+    <h2 class="text-xl text-primary font-semibold cursor-pointer" (click)="toggleCreate()" *ngIf="!createStatus">+ Add Category</h2>
+    <div class="w-6/12 mb-10"  *ngIf="createStatus">
+    <app-category-create (toggleCreateCategoryEvent)="toggleCreate()"></app-category-create>
+    </div>
+    <div *ngFor="let item of categories" class="flex flex-row gap-10 items-baseline w-6/12 justify-between">
+        <ng-container *ngIf="!editStatus">
+        <h2 class="text-xl">{{item.title}}</h2>
+        <div class="flex flex-row gap-4">
+        <button class="bg-red-600 px-4 py-2 rounded-md hover:bg-red-500" (click)="deleteCategory(item.id)">Delete</button>
+        <button class="bg-primary px-4 py-2 rounded-md hover:opacity-90" (click)="toggleEdit(item)">Edit</button>
+        </div>
+    </ng-container>
+    </div>
+    <div class="w-6/12 mb-10"  *ngIf="editStatus">
+        <app-category-edit (toggleEditCategoryEvent)="toggleEditView()" [category]="EditCategory"></app-category-edit>
+    </div>
+</div>  

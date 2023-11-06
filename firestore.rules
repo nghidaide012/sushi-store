@@ -1,0 +1,39 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function Authenticated() {
+    	return request.auth.uid != null;
+    }
+    function isAdmin() {
+    	return isAuthenticated() && 
+      	exists(/databases/$(database)/documents/administrators/$(request.auth.uid));
+    }
+    function isAuthor() {
+    	return isAuthenticated() && request.auth.uid == resource.data.author.uid;
+    }
+  
+  match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  match /administrators/{adminid} {
+  		allow read,write: if false;
+  	}
+  match /product/{productid} {
+  		allow read: if true;
+      allow read, write: if isAdmin();
+  	}
+  match /category/{categoryid}{
+  		allow read: if true;
+      allow read, write: if isAdmin();
+  	}
+  match /order/{orderid} {
+  		allow read, write: if isAuthor();
+  		allow read, write: if isAdmin();   
+  	}
+     match /orderItem/{orderItemid} {
+  		allow read, write: if isAuthor();
+  		allow read, write: if isAdmin();   
+  	}
+  }
+}

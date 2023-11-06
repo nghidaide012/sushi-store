@@ -1,0 +1,11 @@
+<form [formGroup]="form" class="w-full flex flex-row justify-between items-end" (ngSubmit)="onEdit()">
+    <div class="flex flex-col w-6/12 relative">
+        <label for="name" class="text-xl text-primary">Category Name: </label>
+        <input type="text" id="name" formControlName="name" class="placeholder:text-primary placeholder:opacity-70 border-primary focus:outline-none border-solid border-[1px] mt-4 w-full h-12 border-opacity-50 text-primary p-4 bg-black" />
+        <span *ngIf="!name.valid && name.touched" class="absolute bottom-[-50px] text-red-600">Category name have to contain at least 1 character</span>
+    </div>
+    <div class="w-4/12 flex flex-row gap-6">
+        <button type="submit" class="bg-primary rounded-md hover:opacity-80 disabled:bg-gray-600 hover:disabled:opacity-100 px-4 py-2" [disabled]="!form.valid">Edit</button>
+        <button type="button" class="bg-red-600 rounded-md hover:opacity-80  px-4 py-2" (click)="toggleView()">Back</button>
+    </div>
+</form>

@@ -1,0 +1,18 @@
+<div class="flex flex-col w-full justify-start items-center p-20 gap-10" > 
+    <h1 class="text-4xl">Products</h1>
+    <a [routerLink]="['create']" class="text-xl text-primary font-semibold cursor-pointer">+ Add Product</a>
+    <div *ngFor="let item of productList" class="w-full flex flex-row justify-between items-center gap-2">
+        <div class="flex flex-row justify-start items-center gap-2">
+            <img src={{item.imageUrl}} width="200px" height="200px"/>
+            <div class="flex flex-col items-start gap-10">
+                <h2 class="text-xl text-primary">{{getCategoryName(item.categoryId)}}</h2>
+                <h1 class="text-2xl">{{item.title}}</h1>
+            </div>
+        </div>
+        <div class="flex flex-row gap-4">
+            <button type="button" class="bg-primary rounded-md hover:opacity-80  px-4 py-2" [routerLink]="'edit/'+item.id">Edit</button>
+            <button type="button" class="bg-red-600 rounded-md hover:opacity-80  px-4 py-2"  (click)="deleteProduct(item.id!)">Delete</button>
+            <button (click)="toggleProductStatus(item.id)" class="rounded-md hover:opacity-80 px-4 py-2" [ngStyle]="item.active ? {'background-color': 'red'} : {'background-color': '#f1c232'}">{{item.active ? "Deactivate" : "Activate"}}</button>
+        </div>
+    </div>
+</div>  

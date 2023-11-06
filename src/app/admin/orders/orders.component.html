@@ -1,0 +1,19 @@
+<div class="w-full flex flex-col justify-start items-center  gap-7 ">
+    <div class="w-10/12">
+        <h1 class="text-3xl text-primary border-b-[1px] border-[#695f55] py-8">Orders</h1>
+    </div>
+    <div class="w-10/12 flex flex-col justify-start items-start gap-2 py-4 border-b-[1px] border-[#695f55]" *ngFor="let item of orderList">
+        <h1 class="text-primary">{{getDate(item.orderDate) | date: 'dd/MM/yyyy - hh:mm'}}</h1>
+        <div class="w-full flex flex-row justify-between text-lg">
+            <div class="w-1/2 flex flex-col">
+                <h1><span class="text-primary">Order Number:</span> {{item.id}}</h1>
+                <h1><span class="text-primary">CustomerId:</span> {{item.customerId}}</h1>
+            </div>
+            <div class="w-1/2 flex flex-row justify-end items-center gap-7">
+            <h1>Status: {{item.status}}</h1>
+            <a class=" text-primary hover:opacity-80" [routerLink]="item.id">View Details</a>
+            <button class="bg-red-600 py-1 px-4 rounded-sm hover:opacity-80" (click)="deleteOrder(item.id!)" >Delete</button>
+            </div>
+        </div> 
+    </div>
+</div>
